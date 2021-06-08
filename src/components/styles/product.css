@@ -1,0 +1,37 @@
+.product {
+    background-color: white;
+    width: 250px;
+    height: 320px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.product_image {
+    object-fit: contain;
+    height: 100px;
+    width: 100%;
+}
+
+.product_button {
+    background-color: #f3b43f;
+    transition: all 100ms;
+    cursor: pointer;
+}
+
+.product_button:hover {
+    background-image: linear-gradient(to bottom, #f0a448, #f3c757);
+}
+
+.product_title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.product_description {
+    margin-top: 5px;
+    font-size: 10px;
+    color: rgb(105, 105, 105);
+}

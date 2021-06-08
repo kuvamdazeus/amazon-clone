@@ -1,0 +1,24 @@
+button {
+    border-radius: 3px;
+    text-align: center;
+    padding-inline: 25px;
+    padding-block: 7px;
+    border: none;
+    width: 100%;
+}
+
+.app_footer {
+    background-color: #172231;
+}
+
+.imp_primary {
+    background-color: #f0a448;
+}
+
+.primary {
+    background-color: #f4d27e;
+}
+
+.secondary {
+    background-color: #f0f2f4;
+}
