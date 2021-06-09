@@ -35,3 +35,27 @@
     font-size: 10px;
     color: rgb(105, 105, 105);
 }
+
+.cart_product {
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.cart_product_title {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.cart_product_description {
+    font-size: 10px;
+    color: rgb(105, 105, 105);
+    margin-top: -15px;
+}
+
+.cart_product_image {
+    object-fit: contain;
+    height: 100px;
+    margin: 10px;
+}

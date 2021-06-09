@@ -7,7 +7,6 @@ import './styles/dashboard.css';
 import ProductContainer from './ProductContainer.jsx';
 import Carousel from 'react-material-ui-carousel';
 import axios from 'axios';
-import store from '../app-redux/store';
 import jwt from 'jsonwebtoken';
 
 export default function DashboardContainer() {

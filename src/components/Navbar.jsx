@@ -7,9 +7,12 @@ import { updateState } from '../app-redux/actions';
 import { Dropdown } from 'semantic-ui-react'
 import GoogleLogin from 'react-google-login';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 import jwt from 'jsonwebtoken';
 
 export default function Navbar() {
+
+    const history = useHistory();
 
     const [cartTotal, setCartTotal] = useState(0);
 
@@ -39,28 +42,32 @@ export default function Navbar() {
             <img className='nav_image' src={navLogo} alt='' />
             <input className='nav_search' placeholder='Search' />
 
-            <Dropdown 
-                text={`Hello, ${store.getState().currentUser?.name || 'Sign In'}`}
-                style={{marginTop: -10}}
-            >
-                <Dropdown.Menu>
-                    <Dropdown.Item>
-                        <GoogleLogin
-                            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                            buttonText='Sign in with Google'
-                            onSuccess={handleLogin}
-                            onFailure={console.log}
-                            cookiePolicy={'single_host_origin'}
-                        />
-                    </Dropdown.Item>
-                </Dropdown.Menu>
-            </Dropdown>
+            {store.getState().currentUser?.name ? 
+                <p className='nav_text'>Hello {store.getState().currentUser.name.split(' ')[0]}</p>
+                :
+                <Dropdown 
+                    text={`Hello, Sign In`}
+                    style={{marginTop: -10}}
+                >
+                    <Dropdown.Menu>
+                        <Dropdown.Item>
+                            <GoogleLogin
+                                clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                                buttonText='Sign in with Google'
+                                onSuccess={handleLogin}
+                                onFailure={console.log}
+                                cookiePolicy={'single_host_origin'}
+                            />
+                        </Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+            }
 
             
 
             <p className='nav_text'><b>Orders</b></p>
 
-            <div>
+            <div onClick={() => history.push('/cart')}>
                 <ShoppingCartIcon style={{color: 'white', cursor: 'pointer', marginTop: -7}} />
                 <span style={{color: '#f0a448'}}>{cartTotal}</span>
             </div>

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import store from './app-redux/store.js';
 import { updateState } from './app-redux/actions.js';
 import DashboardContainer from './components/DashboardContainer.jsx';
+import CartContainer from './components/CartContainer.jsx';
 import Navbar from'./components/Navbar.jsx';
 import './styles/App.css';
 import axios from 'axios';
@@ -39,11 +40,8 @@ function App() {
 
 			<Switch>
 				<Route exact path='/' component={DashboardContainer} />
+				<Route exact path='/cart' component={CartContainer} />
 			</Switch>
-			
-			<footer className='app_footer'>
-				<h1>Footer</h1>
-			</footer>
 		</Router>
   	);
 }

@@ -1,0 +1,15 @@
+.cart {
+    border: 1px solid red;
+    padding-inline: 7vw;
+    padding-block: 2vh;
+}
+
+.cart_container {
+    background-color: white;
+    padding-block: 1vh;
+    padding-inline: 2vw;
+}
+
+.cart_divider {
+    border: 0.01px solid rgb(243, 243, 243);
+}
