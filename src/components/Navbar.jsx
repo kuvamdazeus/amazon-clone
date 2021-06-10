@@ -15,11 +15,12 @@ export default function Navbar() {
     const history = useHistory();
 
     const [cartTotal, setCartTotal] = useState(0);
+    const [username, setUsername] = useState('');
 
     useEffect(() => {
         store.subscribe(() => {
             setCartTotal(store.getState().cartItems.length);
-            console.log(store.getState());
+            setUsername(store.getState().currentUser.name);
         });
 
     }, []);
@@ -32,7 +33,7 @@ export default function Navbar() {
         .then(res => {
             store.dispatch(updateState(res.data));
             
-            let localData = jwt.sign({ email: res.data.email }, process.env.REACT_APP_JWT_SECRET);
+            let localData = jwt.sign({ email: res.data.email, name: res.data.name }, process.env.REACT_APP_JWT_SECRET);
             localStorage.setItem('amzclone', localData);
         });
     }
@@ -43,7 +44,7 @@ export default function Navbar() {
             <input className='nav_search' placeholder='Search' />
 
             {store.getState().currentUser?.name ? 
-                <p className='nav_text'>Hello {store.getState().currentUser.name.split(' ')[0]}</p>
+                <p className='nav_text'>Hello, {username.split(' ')[0]}</p>
                 :
                 <Dropdown 
                     text={`Hello, Sign In`}

@@ -1,7 +1,18 @@
 import './styles/product.css';
-import { Button } from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
+import store from '../app-redux/store';
+import { alterCart, removeFromCart } from '../app-redux/actions';
 
-export default function CheckoutProductContainer({ product }) {
+export default function CheckoutProductContainer({ product, cartTotal, setCartTotal }) {
+
+    const handleRemoveOne = () => {
+        if (product.quantity > 1)
+            store.dispatch(alterCart({ ...product, quantity: product.quantity - 1 }));
+    }
+
+    const handleAddOne = () => {
+        store.dispatch(alterCart({ ...product, quantity: product.quantity + 1 }));
+    }
 
     const checkoutControlWideStyles = {
         flex: 0.3,
@@ -34,6 +45,7 @@ export default function CheckoutProductContainer({ product }) {
                         <div>
                             <p className='cart_product_title'>{product.title}</p>
                             <p className='cart_product_description'>{product.description}</p>
+                            <p className='cart_product_price'><b>${product.price}</b></p>
                         </div>
                     </div><br />
 
@@ -43,7 +55,10 @@ export default function CheckoutProductContainer({ product }) {
                                 Buy Now
                             </Button>
 
-                            <Button fluid style={{ backgroundColor: '#f3b43f' }}>
+                            <Button fluid
+                                style={{ backgroundColor: '#f3b43f' }}
+                                onClick={() => store.dispatch(removeFromCart(product))}
+                            >
                                 Remove Item
                             </Button>
                         </center>
@@ -57,8 +72,9 @@ export default function CheckoutProductContainer({ product }) {
                         <div>
                             <p className='cart_product_title'>{product.title}</p>
                             <p className='cart_product_description'>{product.description}</p>
+                            <h4 style={{marginTop: 0}}>${product.price}</h4>
                         </div>
-                    </div>
+                    </div><br />
 
                     <div style={window.screen.width > 650 ? checkoutControlWideStyles : checkoutControlSmallStyles}>
                         <center>
@@ -66,14 +82,20 @@ export default function CheckoutProductContainer({ product }) {
                                 Buy Now
                             </Button>
 
-                            <Button fluid style={{ backgroundColor: '#f3b43f' }}>
+                            <Button fluid
+                                style={{ backgroundColor: '#f3b43f', marginBottom: 5 }}
+                                onClick={() => store.dispatch(removeFromCart(product))}
+                            >
                                 Remove Item
                             </Button>
+
+                            <Icon onClick={handleRemoveOne} name='minus' style={{color: 'gray', cursor: 'pointer'}} />
+                            {product.quantity}
+                            <Icon onClick={handleAddOne} name='add' style={{color: 'gray', cursor: 'pointer'}} />
                         </center>
                     </div>
                 </>
             }
-            <br /><br />
         </section>
     );
 }

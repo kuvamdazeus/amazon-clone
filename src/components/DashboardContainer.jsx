@@ -57,7 +57,7 @@ export default function DashboardContainer() {
                 }}
             >
 
-                {products.map((product, index) => <ProductContainer product={product} key={index} />)}
+                {products.map((product) => <ProductContainer product={product} key={product.id} />)}
             
             </section>
         </>

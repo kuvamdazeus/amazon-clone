@@ -1,13 +1,16 @@
 .cart {
-    border: 1px solid red;
     padding-inline: 7vw;
     padding-block: 2vh;
+    display: flex;
+    justify-content: center;
 }
 
 .cart_container {
     background-color: white;
     padding-block: 1vh;
     padding-inline: 2vw;
+    width: 100%;
+    max-width: 900px;
 }
 
 .cart_divider {

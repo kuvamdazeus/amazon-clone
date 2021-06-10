@@ -1,4 +1,5 @@
 import * as actionTypes from './actionTypes.js';
+import store from './store.js';
 
 export function addToCart(product) {
     return {
@@ -16,5 +17,27 @@ export function updateState(dbUser) {
             orders: dbUser.orders,
             addresses: dbUser.addresses
         }
+    }
+}
+
+export function alterCart(newProduct) {
+    let alteredItems = store.getState().cartItems.filter(item => item.id !== newProduct.id);
+    alteredItems.push(newProduct);
+
+    return {
+        type: actionTypes.updateState,
+        update: {
+            currentUser: store.getState().currentUser,
+            cartItems: alteredItems,
+            orders: store.getState().orders,
+            addresses: store.getState().addresses,
+        }
+    }
+}
+
+export function removeFromCart(product) {
+    return {
+        type: actionTypes.removeFromCart,
+        productId: product.id,
     }
 }

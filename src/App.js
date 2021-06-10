@@ -29,7 +29,8 @@ function App() {
 			}
 			let codedString = jwt.sign(rawData, process.env.REACT_APP_JWT_SECRET);
 
-			await axios.post(`${process.env.REACT_APP_BASE_URL}/update-user`, { encrypted: codedString });
+			axios.post(`${process.env.REACT_APP_BASE_URL}/update-user`, { encrypted: codedString })
+			.then(console.log);
         });
 
 	}, []);

@@ -41,6 +41,7 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    margin-bottom: 20px;
 }
 
 .cart_product_title {
@@ -57,5 +58,6 @@
 .cart_product_image {
     object-fit: contain;
     height: 100px;
+    width: 100px;
     margin: 10px;
 }
