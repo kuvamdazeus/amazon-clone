@@ -1,7 +1,8 @@
 .cart {
-    padding-inline: 7vw;
-    padding-block: 2vh;
+    padding-inline: 30px;
+    padding-block: 3vh;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
 }
 
@@ -11,8 +12,16 @@
     padding-inline: 2vw;
     width: 100%;
     max-width: 900px;
+    margin-bottom: 10px;
 }
 
 .cart_divider {
     border: 0.01px solid rgb(243, 243, 243);
+}
+
+.checkout_section {
+    background-color: white;
+    height: auto;
+    margin-left: 10px;
+    padding-inline: 15px;
 }

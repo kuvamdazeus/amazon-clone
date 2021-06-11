@@ -45,22 +45,26 @@ export default function CheckoutProductContainer({ product, cartTotal, setCartTo
                         <div>
                             <p className='cart_product_title'>{product.title}</p>
                             <p className='cart_product_description'>{product.description}</p>
-                            <p className='cart_product_price'><b>${product.price}</b></p>
+                            <h4 style={{marginTop: 0}}>${product.price}</h4>
                         </div>
                     </div><br />
 
                     <div style={window.screen.width > 650 ? checkoutControlWideStyles : checkoutControlSmallStyles}>
                         <center>
-                            <Button fluid style={{ backgroundColor: '#f3963f', marginBottom: 5 }}>
+                            <Button fluid style={{ backgroundColor: '#f3c33fb7', marginBottom: 5 }}>
                                 Buy Now
                             </Button>
 
                             <Button fluid
-                                style={{ backgroundColor: '#f3b43f' }}
+                                style={{ backgroundColor: '#f3c33fb7', marginBottom: 5 }}
                                 onClick={() => store.dispatch(removeFromCart(product))}
                             >
                                 Remove Item
                             </Button>
+
+                            <Icon onClick={handleRemoveOne} name='minus' style={{color: 'gray', cursor: 'pointer'}} />
+                            {product.quantity}
+                            <Icon onClick={handleAddOne} name='add' style={{color: 'gray', cursor: 'pointer'}} />
                         </center>
                     </div>
                 </center>
@@ -78,12 +82,12 @@ export default function CheckoutProductContainer({ product, cartTotal, setCartTo
 
                     <div style={window.screen.width > 650 ? checkoutControlWideStyles : checkoutControlSmallStyles}>
                         <center>
-                            <Button fluid style={{ backgroundColor: '#f3963f', marginBottom: 5 }}>
+                            <Button fluid style={{ backgroundColor: '#f3c33fb7', marginBottom: 5 }}>
                                 Buy Now
                             </Button>
 
                             <Button fluid
-                                style={{ backgroundColor: '#f3b43f', marginBottom: 5 }}
+                                style={{ backgroundColor: '#f3c33fb7', marginBottom: 5 }}
                                 onClick={() => store.dispatch(removeFromCart(product))}
                             >
                                 Remove Item

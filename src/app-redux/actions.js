@@ -35,6 +35,18 @@ export function alterCart(newProduct) {
     }
 }
 
+export function cartCheckout() {
+    return {
+        type: actionTypes.updateState,
+        update: {
+            currentUser: store.getState().currentUser,
+            cartItems: [],
+            orders: [...store.getState().orders, store.getState().cartItems],
+            addresses: store.getState().addresses,
+        }
+    }
+}
+
 export function removeFromCart(product) {
     return {
         type: actionTypes.removeFromCart,

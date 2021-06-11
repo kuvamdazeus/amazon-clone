@@ -10,7 +10,7 @@ export default function ProductContainer({ product }) {
 
     useEffect(() => {
         const productStars = [];
-        for (let i = 0; i < Math.ceil(Math.random() * 5); i++) {
+        for (let i = 0; i <= Math.ceil(Math.random() * 5); i++) {
             productStars.push(i);
         }
 
