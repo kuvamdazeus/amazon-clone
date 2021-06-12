@@ -25,7 +25,7 @@ export default function CartContainer() {
     }, []);
 
     const handleCartCheckout = () => {
-        if (store.getState().cartItems.length > 0) {
+        if (store.getState().cartItems.length > 0 && store.getState().currentUser?.name) {
             store.dispatch(cartCheckout());
             setCheckedOut(true);
             dataUpdate();
@@ -52,7 +52,7 @@ export default function CartContainer() {
 
                     <Button 
                         style={{backgroundColor: '#f3c33fb7'}}
-                        onClick={() => history.push('/')}
+                        onClick={() => {history.push('/');dataUpdate()}}
                     >
                         Continue Shopping
                     </Button>
