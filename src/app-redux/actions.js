@@ -41,7 +41,7 @@ export function cartCheckout() {
         update: {
             currentUser: store.getState().currentUser,
             cartItems: [],
-            orders: [...store.getState().orders, store.getState().cartItems],
+            orders: [...store.getState().orders, { items: store.getState().cartItems, time: Date.now() }],
             addresses: store.getState().addresses,
         }
     }
@@ -51,5 +51,30 @@ export function removeFromCart(product) {
     return {
         type: actionTypes.removeFromCart,
         productId: product.id,
+    }
+}
+
+export function cancelOrder(product) {
+
+    let newOrders = [];
+
+    store.getState().orders.forEach(order => {
+        if (order.time === product.orderedAt) {
+            let orderItems = order.items.filter(item => item.id !== product.id);
+            newOrders.push({ items: orderItems, time: order.time });
+        
+        } else newOrders.push(order);
+    });
+
+    newOrders = newOrders.filter(order => order.items.length > 0);
+
+    return {
+        type: actionTypes.updateState,
+        update: {
+            currentUser: store.getState().currentUser,
+            cartItems: store.getState().cartItems,
+            orders: newOrders,
+            addresses: store.getState().addresses,
+        }
     }
 }

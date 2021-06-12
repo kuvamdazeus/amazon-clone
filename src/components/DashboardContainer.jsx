@@ -27,7 +27,7 @@ export default function DashboardContainer() {
 
     return (
         <>
-            <Carousel indicators={false} animation='slide'>
+            <Carousel indicators={false} animation='slide' interval={5000}>
                 <div>
                     <img src={image1} style={{objectFit: 'contain', width: '100%'}} alt='' />
                 </div>
@@ -51,7 +51,7 @@ export default function DashboardContainer() {
             <section
                 className="dashboard_container"
                 style={{
-                    marginTop: window.screen.width > 600 ? '-22vh' : 0,
+                    marginTop: window.screen.width > 600 ? '-25vw' : 0,
                     position: window.screen.width > 600 && 'absolute',
                     zIndex: window.screen.width > 600 && 3,
                 }}

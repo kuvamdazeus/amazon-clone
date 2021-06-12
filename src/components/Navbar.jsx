@@ -4,7 +4,7 @@ import navLogo from '../assets/nav_logo.png';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCartOutlined';
 import store from '../app-redux/store.js';
 import { updateState } from '../app-redux/actions';
-import { Dropdown } from 'semantic-ui-react'
+import { Dropdown, Icon } from 'semantic-ui-react'
 import GoogleLogin from 'react-google-login';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -40,8 +40,15 @@ export default function Navbar() {
 
     return (
         <nav className='navbar'>
-            <img className='nav_image' src={navLogo} alt='' />
-            <input className='nav_search' placeholder='Search' />
+            <img className='nav_image' src={navLogo} alt='' onClick={() => history.push('/')} />
+            
+            <div className='nav_search_container'>
+                <input className='nav_search' />
+
+                <div className='icon_container'>
+                    <Icon style={{marginTop: -7}} name='search' />
+                </div>
+            </div>
 
             {store.getState().currentUser?.name ? 
                 <p className='nav_text'>Hello, {username.split(' ')[0]}</p>
@@ -66,7 +73,7 @@ export default function Navbar() {
 
             
 
-            <p className='nav_text'><b>Orders</b></p>
+            <p className='nav_text' onClick={() => history.push('/orders')}><b>Orders</b></p>
 
             <div onClick={() => history.push('/cart')}>
                 <ShoppingCartIcon style={{color: 'white', cursor: 'pointer', marginTop: -7}} />

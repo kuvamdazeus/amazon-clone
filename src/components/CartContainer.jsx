@@ -25,9 +25,11 @@ export default function CartContainer() {
     }, []);
 
     const handleCartCheckout = () => {
-        store.dispatch(cartCheckout());
-        setCheckedOut(true);
-        dataUpdate();
+        if (store.getState().cartItems.length > 0) {
+            store.dispatch(cartCheckout());
+            setCheckedOut(true);
+            dataUpdate();
+        }
     }
 
     return (
@@ -56,7 +58,7 @@ export default function CartContainer() {
                     </Button>
                 </section>
 
-                <section className='checkout_section' style={{width: window.screen.width < 1200 && '100%', maxWidth: 900}}>
+                <section className='checkout_section' style={{width: window.screen.width < 1180 && '100%', maxWidth: 900}}>
                     <p style={{fontSize: 16, marginTop: 15}}>
                         Subtotal ({storeState.cartItems.length} items):{' '}
                         <b>${Math.ceil(storeState.cartItems.length > 0 && storeState.cartItems.map(item => item.price * item.quantity).reduce((a, b) => a + b))}</b>
@@ -65,7 +67,6 @@ export default function CartContainer() {
                     <Button fluid
                         style={{backgroundColor: '#f3c33fb7' }}
                         onClick={handleCartCheckout}
-                        // make a state update request here instead of using redux for PAYMENTS !
                     >
                         Proceed to checkout
                     </Button>
