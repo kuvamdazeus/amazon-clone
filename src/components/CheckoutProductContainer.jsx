@@ -16,17 +16,19 @@ export default function CheckoutProductContainer({ product }) {
     }
 
     const handleBuyNow = () => {
-        store.dispatch({
-            type: updateState,
-            update: {
-                ...store.getState(),
-                cartItems: store.getState().cartItems.filter(item => item.id !== product.id),
-                orders: [...store.getState().orders, { items: [product], time: Date.now() }]
-            }
-        });
+        if (store.getState().currentUser?.name) {
+            store.dispatch({
+                type: updateState,
+                update: {
+                    ...store.getState(),
+                    cartItems: store.getState().cartItems.filter(item => item.id !== product.id),
+                    orders: [...store.getState().orders, { items: [product], time: Date.now() }]
+                }
+            });
 
-        store.dispatch(removeFromCart(product));
-        dataUpdate();
+            store.dispatch(removeFromCart(product));
+            dataUpdate();
+        }
     }
 
     const checkoutControlWideStyles = {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import store from '../app-redux/store';
 import { cancelOrder } from '../app-redux/actions';
+import { dataUpdate } from '../App';
 import { Button } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import './styles/orders.css';
@@ -92,7 +93,7 @@ export default function Orders() {
 
                 <Button 
                     style={{backgroundColor: '#f3c33fb7'}}
-                    onClick={() => history.push('/')}
+                    onClick={() => {history.push('/');dataUpdate()}}
                 >
                     Continue Shopping
                 </Button>
