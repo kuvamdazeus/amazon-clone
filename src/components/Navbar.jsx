@@ -26,12 +26,20 @@ export default function Navbar() {
     }, []);
 
     const handleLogin = data => {
-        // Send data to backend for authentication/creation of the user & get full data back
         let codedString = jwt.sign(data.profileObj, process.env.REACT_APP_JWT_SECRET);
 
         axios.post(`${process.env.REACT_APP_BASE_URL}/auth`, { encrypted: codedString })
         .then(res => {
-            store.dispatch(updateState(res.data));
+            let newCartItems = res.data.cartItems;
+            let ids = res.data.cartItems.map(item => item.id);
+            
+            store.getState().cartItems.forEach(item => {
+                if (!ids.includes(item.id)) {
+                    newCartItems.push(item);
+                }
+            });
+
+            store.dispatch(updateState({ ...res.data, cartItems: newCartItems }));
             
             let localData = jwt.sign({ email: res.data.email, name: res.data.name }, process.env.REACT_APP_JWT_SECRET);
             localStorage.setItem('amzclone', localData);
@@ -51,7 +59,7 @@ export default function Navbar() {
             </div>
 
             {store.getState().currentUser?.name ? 
-                <p className='nav_text'>Hello, {username.split(' ')[0]}</p>
+                <p className='nav_text'>Hello, {username?.split(' ')[0]}</p>
                 :
                 <Dropdown 
                     text={`Hello, Sign In`}
